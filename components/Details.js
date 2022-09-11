@@ -1,4 +1,7 @@
-import { NavigationHelpersContext } from '@react-navigation/native';
+/* eslint-disable no-shadow */
+/* eslint-disable no-alert */
+/* eslint-disable no-undef */
+/* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
 import {
   View,
@@ -57,7 +60,7 @@ export default Details = ({ route, navigation }) => {
 
       {/* Price */}
       <View style={styles.priceWrapper}>
-        <Text style={styles.priceText}>${item.price}</Text>
+        <Text style={styles.priceText}>₹{item.price}</Text>
       </View>
 
       {/* Pizza info */}

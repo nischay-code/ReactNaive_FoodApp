@@ -1,3 +1,6 @@
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable eqeqeq */
+/* eslint-disable no-undef */
 import * as React from 'react';
 import {
   View,
@@ -14,7 +17,6 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import categoriesData from '../assets/data/categoriesData';
 import popularData from '../assets/data/popularData';
 import colors from '../assets/colors/colors';
-import { color, round } from 'react-native-reanimated';
 
 Feather.loadFont();
 MaterialCommunityIcons.loadFont();
@@ -41,8 +43,8 @@ export default Home = ({ navigation }) => {
           ]}>
           <Text>
             <Feather
-              name="chevron-right"
-              size={8}
+              name="arrow-right"
+              size={25}
               style={styles.categorySelectIcon}
               color={item.selected ? colors.black : colors.white}
             />
