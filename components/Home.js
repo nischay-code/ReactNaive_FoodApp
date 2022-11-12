@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable eqeqeq */
 /* eslint-disable no-undef */
@@ -11,6 +12,9 @@ import {
   FlatList,
   ScrollView,
   TouchableOpacity,
+  TextInput,
+  Modal,
+  Pressable,
 } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -22,6 +26,7 @@ Feather.loadFont();
 MaterialCommunityIcons.loadFont();
 
 export default Home = ({ navigation }) => {
+  const [modalVisible, setModalVisible] = React.useState(false);
   const renderCategoryItem = ({ item }) => {
     return (
       <View
@@ -62,11 +67,31 @@ export default Home = ({ navigation }) => {
         {/* Header */}
         <SafeAreaView>
           <View style={styles.headerWrapper}>
-            <Image
-              source={require('../assets/images/profile.png')}
-              style={styles.profileImage}
-            />
-            <Feather name="menu" size={24} color={colors.textDark} />
+            <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
+              <Image
+                source={require('../assets/images/profile.png')}
+                style={styles.profileImage}
+              />
+              <Modal
+                animationType="slide"
+                presentationStyle="fullScreen"
+                // transparent={true}
+                visible={modalVisible}>
+                <View style={styles.centeredView}>
+                  <View style={styles.modalView}>
+                    <Text style={styles.modalText}>User Details</Text>
+                    <Pressable
+                      style={[styles.button, styles.buttonClose]}
+                      onPress={() => setModalVisible(!modalVisible)}>
+                      <Text style={styles.textStyle}>Close</Text>
+                    </Pressable>
+                  </View>
+                </View>
+              </Modal>
+            </TouchableOpacity>
+            <TouchableOpacity >
+              <Feather name="menu" size={24} color={colors.textDark} />
+            </TouchableOpacity>
           </View>
         </SafeAreaView>
 
@@ -78,9 +103,9 @@ export default Home = ({ navigation }) => {
 
         {/* Search */}
         <View style={styles.searchWrapper}>
-          <Feather name="search" size={16} color={colors.textDark} />
+          <Feather name="search" size={26} color={colors.textDark} />
           <View style={styles.search}>
-            <Text style={styles.searchText}>Search</Text>
+            <TextInput style={styles.searchText} placeholder="Search" />
           </View>
         </View>
 
@@ -102,6 +127,7 @@ export default Home = ({ navigation }) => {
           <Text style={styles.popularTitle}>Popular</Text>
           {popularData.map((item) => (
             <TouchableOpacity
+              activeOpacity={1}
               key={item.id}
               onPress={() =>
                 navigation.navigate('Details', {
@@ -164,6 +190,7 @@ export default Home = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginBottom: 5,
   },
   headerWrapper: {
     flexDirection: 'row',
@@ -206,9 +233,9 @@ const styles = StyleSheet.create({
   },
   searchText: {
     fontFamily: 'Montserrat-Semibold',
-    fontSize: 14,
-    marginBottom: 5,
-    color: colors.textLight,
+    fontSize: 16,
+    marginBottom: 1,
+    color: 'black',
   },
   categoriesWrapper: {
     marginTop: 30,
@@ -337,5 +364,43 @@ const styles = StyleSheet.create({
     width: 210,
     height: 125,
     resizeMode: 'contain',
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  buttonClose: {
+    backgroundColor: colors.black,
+  },
+  textStyle: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
   },
 });

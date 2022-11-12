@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable no-shadow */
 /* eslint-disable no-alert */
 /* eslint-disable no-undef */
@@ -11,6 +12,7 @@ import {
   TouchableOpacity,
   Image,
   FlatList,
+  ScrollView,
 } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -34,7 +36,7 @@ export default Details = ({ route, navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       {/* Header */}
       <SafeAreaView>
         <View style={styles.headerWrapper}>
@@ -107,13 +109,14 @@ export default Details = ({ route, navigation }) => {
           <Feather name="chevron-right" size={18} color={colors.black} />
         </View>
       </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = new StyleSheet.create({
   container: {
     flex: 1,
+    marginBottom: 8,
   },
   headerWrapper: {
     flexDirection: 'row',
